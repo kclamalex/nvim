@@ -17,6 +17,13 @@ local firenvim_not_active = function()
 end
 
 local plugin_specs = {
+	-- Git highlights
+	{
+		"lewis6991/gitsigns.nvim",
+		config = function()
+			require("config.gitsigns")
+		end,
+	},
 	-- Syntax highlighting
 	{
 		"nvim-treesitter/nvim-treesitter",
