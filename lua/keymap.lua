@@ -40,3 +40,8 @@ map('n', '<leader>s', ':w<CR>')
 
 -- Close all windows and exit from Neovim with <leader> and q
 map('n', '<leader>q', ':qa!<CR>')
+
+-- Map key to move between buffer quickly
+map ('n', '<leader>n', ':bnext<CR>')
+map ('n', '<leader>p', ':bprevious<CR>')
+map ('n', '<leader>d', ':bdelete<CR>')

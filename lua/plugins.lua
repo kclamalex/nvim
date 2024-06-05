@@ -17,6 +17,18 @@ local firenvim_not_active = function()
 end
 
 local plugin_specs = {
+	-- Hybrid line number plugin
+	{
+		"myusuf3/numbers.vim",
+	},
+	-- Comment plugin
+	{
+		"numToStr/Comment.nvim",
+		lazy = false,
+		config = function()
+			require("config.comment")
+		end,
+	},
 	-- Git highlights
 	{
 		"lewis6991/gitsigns.nvim",
