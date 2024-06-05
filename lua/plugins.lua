@@ -70,10 +70,12 @@ local plugin_specs = {
 	-- file explorer
 	{
 		"nvim-tree/nvim-tree.lua",
-		version = "*",
-		lazy = false,
+		keys = { "<leader>t" },
 		dependencies = {
 			"nvim-tree/nvim-web-devicons",
+			config = function()
+				require("config.nvim-tree")
+			end,
 		},
 	},
 	-- Git command inside vim
