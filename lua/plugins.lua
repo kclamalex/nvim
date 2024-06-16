@@ -88,6 +88,9 @@ local plugin_specs = {
 	-- Language server
 	{
 		"neovim/nvim-lspconfig",
+		opts = {
+			inlay_hints = { enabled = true },
+		},
 		config = function()
 			require("config.lsp")
 		end,
