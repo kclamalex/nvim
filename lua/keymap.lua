@@ -26,7 +26,7 @@ map("", "<right>", "<nop>")
 -- Clear search highlighting with <leader> and c
 map("n", "<leader>c", ":nohl<CR>")
 
--- Move around splits using Ctrl + {h,j,k,l}
+-- Move around splits using Alt + {h,j,k,l}
 map("n", "<A-h>", "<C-w>h")
 map("n", "<A-j>", "<C-w>j")
 map("n", "<A-k>", "<C-w>k")
