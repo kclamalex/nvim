@@ -17,6 +17,10 @@ local firenvim_not_active = function()
 end
 
 local plugin_specs = {
+	-- Copilot plugin
+	{
+		"github/copilot.vim",
+	},
 	-- Hybrid line number plugin
 	{
 		"myusuf3/numbers.vim",
