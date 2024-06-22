@@ -1,8 +1,9 @@
-local keymap = vim.keymap
+local utils = require("utils")
 
-keymap.set("n", "<leader>gs", "<cmd>Git<cr>", { desc = "Git status" })
-keymap.set("n", "<leader>gw", "<cmd>Gwrite<cr>", { desc = "Git add" })
-keymap.set("n", "<leader>gc", "<cmd>Git commit<cr>", { desc = "Git commit" })
-keymap.set("n", "<leader>gd", "<cmd>Gdiffsplit<cr>", { desc = "Git diff" })
-keymap.set("n", "<leader>gpl", "<cmd>Git pull<cr>", { desc = "Git pull" })
-keymap.set("n", "<leader>gpu", "<cmd>15 split|term git push<cr>", { desc = "Git push" })
+utils.keymap("n", "<leader>gs", "<cmd>Git<cr>", { desc = "Git status" })
+utils.keymap("n", "<leader>gw", "<cmd>Gwrite<cr>", { desc = "Git add" })
+utils.keymap("n", "<leader>gc", "<cmd>Git commit<cr>", { desc = "Git commit" })
+utils.keymap("n", "<leader>gd", "<cmd>Gdiffsplit<cr>", { desc = "Git diff" })
+utils.keymap("n", "<leader>gpl", "<cmd>Git pull<cr>", { desc = "Git pull" })
+utils.keymap("n", "<leader>gpu", "<cmd>15 split|term git push<cr>", { desc = "Git push" })
+utils.keymap("n", "<leader>gb", "<cmd>Git blame<cr>", { desc = "Git blame" })

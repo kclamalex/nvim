@@ -1,6 +1,5 @@
 local nvim_tree = require("nvim-tree")
-local keymap = vim.keymap
-
+local utils = require("utils")
 nvim_tree.setup({
 	auto_reload_on_write = true,
 	disable_netrw = false,
@@ -61,7 +60,7 @@ nvim_tree.setup({
 	},
 	git = {
 		enable = true,
-		ignore = true,
+		ignore = false,
 		timeout = 400,
 	},
 	actions = {
@@ -102,7 +101,6 @@ nvim_tree.setup({
 	},
 })
 
-keymap.set("n", "<space>t", require("nvim-tree.api").tree.toggle, {
-	silent = true,
+utils.keymap("n", "<space>t", require("nvim-tree.api").tree.toggle, {
 	desc = "toggle nvim-tree",
 })

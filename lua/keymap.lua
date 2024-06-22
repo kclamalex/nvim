@@ -1,15 +1,4 @@
------------------------------------------------------------
--- Define keymaps of Neovim and installed plugins.
------------------------------------------------------------
-
-local function map(mode, lhs, rhs, opts)
-	local options = { noremap = true, silent = true }
-	if opts then
-		options = vim.tbl_extend("force", options, opts)
-	end
-	vim.api.nvim_set_keymap(mode, lhs, rhs, options)
-end
-
+local utils = require("utils")
 -- Change leader to a comma
 vim.g.mapleader = ","
 
@@ -18,33 +7,33 @@ vim.g.mapleader = ","
 -----------------------------------------------------------
 
 -- Disable arrow keys
-map("", "<up>", "<nop>")
-map("", "<down>", "<nop>")
-map("", "<left>", "<nop>")
-map("", "<right>", "<nop>")
+utils.keymap("", "<up>", "<nop>")
+utils.keymap("", "<down>", "<nop>")
+utils.keymap("", "<left>", "<nop>")
+utils.keymap("", "<right>", "<nop>")
 
 -- Clear search highlighting with <leader> and c
-map("n", "<leader>c", ":nohl<CR>")
+utils.keymap("n", "<leader>c", ":nohl<CR>")
 
 -- Move around splits using Alt + {h,j,k,l}
-map("n", "<A-h>", "<C-w>h")
-map("n", "<A-j>", "<C-w>j")
-map("n", "<A-k>", "<C-w>k")
-map("n", "<A-l>", "<C-w>l")
+utils.keymap("n", "<A-h>", "<C-w>h")
+utils.keymap("n", "<A-j>", "<C-w>j")
+utils.keymap("n", "<A-k>", "<C-w>k")
+utils.keymap("n", "<A-l>", "<C-w>l")
 
 -- Reload configuration without restart nvim
-map("n", "<leader>r", ":so %<CR>")
+utils.keymap("n", "<leader>r", ":so %<CR>")
 
 -- Fast saving with <leader> and s
-map("n", "<leader>s", ":w<CR>")
+utils.keymap("n", "<leader>s", ":w<CR>")
 
 -- Close all windows and exit from Neovim with <leader> and q
-map("n", "<leader>q", ":qa!<CR>")
+utils.keymap("n", "<leader>q", ":qa!<CR>")
 
 -- Map key to move between buffer quickly
-map("n", "<leader>n", ":bnext<CR>")
-map("n", "<leader>p", ":bprevious<CR>")
-map("n", "<leader>d", ":bdelete<CR>")
+utils.keymap("n", "<leader>n", ":bnext<CR>")
+utils.keymap("n", "<leader>p", ":bprevious<CR>")
+utils.keymap("n", "<leader>d", ":bdelete<CR>")
 
 -- Map key to format the code
-map("n", "<space>f", ":Neoformat<CR>")
+utils.keymap("n", "<space>f", ":Neoformat<CR>")

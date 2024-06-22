@@ -1,22 +1,19 @@
 local api = vim.api
-local keymap = vim.keymap
+local utils = require("utils")
 local dashboard = require("dashboard")
 
 local conf = {}
 conf.header = {
-	"                                                       ",
-	"                                                       ",
-	"                                                       ",
-	" ███╗   ██╗ ███████╗ ██████╗  ██╗   ██╗ ██╗ ███╗   ███╗",
-	" ████╗  ██║ ██╔════╝██╔═══██╗ ██║   ██║ ██║ ████╗ ████║",
-	" ██╔██╗ ██║ █████╗  ██║   ██║ ██║   ██║ ██║ ██╔████╔██║",
-	" ██║╚██╗██║ ██╔══╝  ██║   ██║ ╚██╗ ██╔╝ ██║ ██║╚██╔╝██║",
-	" ██║ ╚████║ ███████╗╚██████╔╝  ╚████╔╝  ██║ ██║ ╚═╝ ██║",
-	" ╚═╝  ╚═══╝ ╚══════╝ ╚═════╝    ╚═══╝   ╚═╝ ╚═╝     ╚═╝",
-	"                                                       ",
-	"                                                       ",
-	"                                                       ",
-	"                                                       ",
+	"                                                      ",
+	"                                                      ",
+	"███╗   ██╗ ███████╗ ██████╗  ██╗   ██╗ ██╗ ███╗   ███╗",
+	"████╗  ██║ ██╔════╝██╔═══██╗ ██║   ██║ ██║ ████╗ ████║",
+	"██╔██╗ ██║ █████╗  ██║   ██║ ██║   ██║ ██║ ██╔████╔██║",
+	"██║╚██╗██║ ██╔══╝  ██║   ██║ ╚██╗ ██╔╝ ██║ ██║╚██╔╝██║",
+	"██║ ╚████║ ███████╗╚██████╔╝  ╚████╔╝  ██║ ██║ ╚═╝ ██║",
+	"╚═╝  ╚═══╝ ╚══════╝ ╚═════╝    ╚═══╝   ╚═╝ ╚═╝     ╚═╝",
+	"                                                      ",
+	"                                                      ",
 }
 
 conf.center = {
@@ -69,7 +66,7 @@ api.nvim_create_autocmd("FileType", {
 	pattern = "dashboard",
 	group = api.nvim_create_augroup("dashboard_enter", { clear = true }),
 	callback = function()
-		keymap.set("n", "q", ":qa<CR>", { buffer = true, silent = true })
-		keymap.set("n", "e", ":enew<CR>", { buffer = true, silent = true })
+		utils.keymap("n", "q", ":qa<CR>", { buffer = true, silent = true })
+		utils.keymap("n", "e", ":enew<CR>", { buffer = true, silent = true })
 	end,
 })

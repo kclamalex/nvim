@@ -1,2 +1,4 @@
 *.log
 .DS_Store
+**/custom_*.vim
+**/custom_*.lua

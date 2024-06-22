@@ -1,6 +1,5 @@
 local fn = vim.fn
 local api = vim.api
-local keymap = vim.keymap
 local lsp = vim.lsp
 local diagnostic = vim.diagnostic
 
@@ -11,35 +10,27 @@ local lspconfig = require("lspconfig")
 local capabilities = require("cmp_nvim_lsp").default_capabilities()
 
 local custom_attach = function(client, bufnr)
-	-- Mappings.
-	local map = function(mode, l, r, opts)
-		opts = opts or {}
-		opts.silent = true
-		opts.buffer = bufnr
-		keymap.set(mode, l, r, opts)
-	end
-
 	if client.server_capabilities.inlayHintProvider then
 		vim.lsp.inlay_hint.enable(true)
 	end
 
-	map("n", "gd", vim.lsp.buf.definition, { desc = "go to definition" })
-	map("n", "K", vim.lsp.buf.hover)
-	map("n", "<C-k>", vim.lsp.buf.signature_help)
-	map("n", "<space>rn", vim.lsp.buf.rename, { desc = "varialbe rename" })
-	map("n", "gr", vim.lsp.buf.references, { desc = "show references" })
-	map("n", "[d", diagnostic.goto_prev, { desc = "previous diagnostic" })
-	map("n", "]d", diagnostic.goto_next, { desc = "next diagnostic" })
+	utils.keymap("n", "gd", vim.lsp.buf.definition, { desc = "go to definition" })
+	utils.keymap("n", "K", vim.lsp.buf.hover)
+	utils.keymap("n", "<C-k>", vim.lsp.buf.signature_help)
+	utils.keymap("n", "<space>rn", vim.lsp.buf.rename, { desc = "varialbe rename" })
+	utils.keymap("n", "gr", vim.lsp.buf.references, { desc = "show references" })
+	utils.keymap("n", "[d", diagnostic.goto_prev, { desc = "previous diagnostic" })
+	utils.keymap("n", "]d", diagnostic.goto_next, { desc = "next diagnostic" })
 	-- TODO: figuring out what are the below commands are before enabling them
 	--
 	-- -- this puts diagnostics from opened files to quickfix
-	-- map("n", "<space>qw", diagnostic.setqflist, { desc = "put window diagnostics to qf" })
+	-- utils.keymap("n", "<space>qw", diagnostic.setqflist, { desc = "put window diagnostics to qf" })
 	-- -- this puts diagnostics from current buffer to quickfix
-	-- map("n", "<space>qb", function() set_qflist(bufnr) end, { desc = "put buffer diagnostics to qf" })
-	-- map("n", "<space>ca", vim.lsp.buf.code_action, { desc = "LSP code action" })
-	-- map("n", "<space>wa", vim.lsp.buf.add_workspace_folder, { desc = "add workspace folder" })
-	-- map("n", "<space>wr", vim.lsp.buf.remove_workspace_folder, { desc = "remove workspace folder" })
-	-- map("n", "<space>wl", function()
+	-- utils.keymap("n", "<space>qb", function() set_qflist(bufnr) end, { desc = "put buffer diagnostics to qf" })
+	-- utils.keymap("n", "<space>ca", vim.lsp.buf.code_action, { desc = "LSP code action" })
+	-- utils.keymap("n", "<space>wa", vim.lsp.buf.add_workspace_folder, { desc = "add workspace folder" })
+	-- utils.keymap("n", "<space>wr", vim.lsp.buf.remove_workspace_folder, { desc = "remove workspace folder" })
+	-- utils.keymap("n", "<space>wl", function()
 	--   inspect(vim.lsp.buf.list_workspace_folders())
 	-- end, { desc = "list workspace folder" })
 	--

@@ -1,4 +1,5 @@
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
+local utils = require("utils")
 if not (vim.uv or vim.loop).fs_stat(lazypath) then
 	vim.fn.system({
 		"git",
@@ -17,6 +18,13 @@ local firenvim_not_active = function()
 end
 
 local plugin_specs = {
+	-- diff view plugin for git
+	{
+		"sindrets/diffview.nvim",
+		config = function()
+			require("config.diffview")
+		end,
+	},
 	-- Copilot plugin
 	{
 		"github/copilot.vim",
@@ -63,7 +71,7 @@ local plugin_specs = {
 	{
 		"nvim-neotest/neotest",
 		config = function()
-			require('config.neotest')
+			require("config.neotest")
 		end,
 		dependencies = {
 			"nvim-neotest/nvim-nio",
@@ -131,9 +139,7 @@ local plugin_specs = {
 	{
 		"nvimdev/dashboard-nvim",
 		cond = firenvim_not_active,
-		config = function()
-			require("config.dashboard-nvim")
-		end,
+		config = utils.load_custom_config("dashboard-nvim"),
 	},
 	{
 		"sainnhe/gruvbox-material",
