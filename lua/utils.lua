@@ -23,9 +23,10 @@ end
 -- Load custom config file for specific module
 function M.load_custom_config(module_name)
 	local custom_module_name = "custom_" .. module_name
-	local plugin_config_dir = vim.fn.stdpath("config") .. "/lua/config/"
+	local plugin_config_dir = fn.stdpath("config") .. "/lua/config/"
 	local module_to_load = "config." .. module_name
-	if vim.fn.filereadable(plugin_config_dir .. custom_module_name) then
+	local is_custom_config_readable = fn.filereadable(plugin_config_dir .. custom_module_name .. ".lua")
+	if is_custom_config_readable == 1 then
 		module_to_load = "config." .. custom_module_name
 	end
 	local config = function()
