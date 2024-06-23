@@ -1,8 +1,8 @@
 scriptencoding utf-8
 
-" Plugins and its lua configurations 
-lua require('plugins')
-
+" --------------- Diffview configurations ---------------  
+nnoremap <silent> <leader>vo :<C-U>DiffviewOpen<CR>
+nnoremap <silent> <leader>vc :<C-U>DiffviewClose<CR>
 " --------------- Leaderf configurations ---------------  
 " Do not use cache file
 let g:Lf_UseCache = 0
@@ -68,4 +68,11 @@ let g:Lf_PreviewResult = {
       \ 'Rg': 0,
       \ 'Gtags': 0
       \}
+
+" In order to make sure all the global variables
+" are applied to the plugin, we should load lua
+" module after setting all the global variables here
+
+" Plugins and its lua configurations 
+lua require('plugins')
 

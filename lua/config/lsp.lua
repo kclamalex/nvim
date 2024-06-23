@@ -158,13 +158,8 @@ if utils.executable("pylsp") then
 				plugins = {
 					-- formatter options
 					black = { enabled = true },
-					autopep8 = { enabled = false },
-					yapf = { enabled = false },
 					-- linter options
-					pylint = { enabled = true, executable = "pylint" },
-					ruff = { enabled = false },
-					pyflakes = { enabled = false },
-					pycodestyle = { enabled = false },
+					ruff = { enabled = true },
 					-- type checker
 					pylsp_mypy = {
 						enabled = true,
@@ -186,4 +181,45 @@ if utils.executable("pylsp") then
 	})
 else
 	vim.notify("pylsp not found!", vim.log.levels.WARN, { title = "Nvim-config" })
+end
+
+if utils.executable("vim-language-server") then
+	lspconfig.vimls.setup({
+		diagnostic = {
+			enable = true,
+		},
+		indexes = {
+			count = 3,
+			gap = 100,
+			projectRootPatterns = { "runtime", "nvim", ".git", "autoload", "plugin" },
+			runtimepath = true,
+		},
+		isNeovim = true,
+		iskeyword = "@,48-57,_,192-255,-#",
+		runtimepath = "",
+		suggest = {
+			fromRuntimepath = true,
+			fromVimruntime = true,
+		},
+		vimruntime = "",
+		capabilities = capabilities,
+	})
+else
+	vim.notify("vimls not found!", vim.log.levels.WARN, { title = "Nvim-config" })
+end
+
+if utils.executable("typescript-language-server") then
+	lspconfig.tsserver.setup({
+		capabilities = capabilities,
+	})
+else
+	vim.notify("tsserver not found!", vim.log.levels.WARN, { title = "Nvim-config" })
+end
+
+if utils.executable("svelteserver") then
+	lspconfig.svelte.setup({
+		capabilities = capabilities,
+	})
+else
+	vim.notify("svelte not found!", vim.log.levels.WARN, { title = "Nvim-config" })
 end
