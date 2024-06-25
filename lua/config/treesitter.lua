@@ -2,7 +2,7 @@ local treesitter = require("nvim-treesitter.configs")
 
 treesitter.setup({
 	-- A list of parser names, or "all" (the five listed parsers should always be installed)
-	ensure_installed = { "c", "lua", "vim", "vimdoc", "query", "rust" },
+	ensure_installed = { "c", "lua", "vim", "vimdoc", "query", "rust", "svelte", "typescript", "javascript", "json", "css", "html" }, 
 
 	-- Install parsers synchronously (only applied to `ensure_installed`)
 	sync_install = false,

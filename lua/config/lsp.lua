@@ -187,7 +187,7 @@ if utils.executable("pylsp") then
 			},
 		})
 	else
-		vim.notify("ruff-lsp not found", vim.log.levels.WARN, { title = "Nvim-config" })
+		vim.notify("pyright not found", vim.log.levels.WARN, { title = "Nvim-config" })
 	end
 else
 	vim.notify("pylsp not found!", vim.log.levels.WARN, { title = "Nvim-config" })
