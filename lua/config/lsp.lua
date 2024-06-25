@@ -142,15 +142,6 @@ if utils.executable("lua-language-server") then
 end
 
 if utils.executable("pylsp") then
-	local venv_path = os.getenv("VIRTUAL_ENV")
-	local py_path = nil
-	-- decide which python executable to use for mypy
-	if venv_path ~= nil then
-		py_path = venv_path .. "/bin/python3"
-	else
-		py_path = vim.g.python3_host_prog
-	end
-
 	lspconfig.pylsp.setup({
 		on_attach = custom_attach,
 		settings = {
@@ -158,19 +149,8 @@ if utils.executable("pylsp") then
 				plugins = {
 					-- formatter options
 					black = { enabled = true },
-					-- linter options
-					ruff = { enabled = true },
-					-- type checker
-					pylsp_mypy = {
-						enabled = true,
-						overrides = { "--python-executable", py_path, true },
-						report_progress = true,
-						live_mode = false,
-					},
-					-- auto-completion options
-					jedi_completion = { fuzzy = true },
-					-- import sorting
-					isort = { enabled = true },
+					autopep8 = { enabled = false },
+					yapf = { enabled = false },
 				},
 			},
 		},
@@ -179,6 +159,36 @@ if utils.executable("pylsp") then
 		},
 		capabilities = capabilities,
 	})
+	-- Setting ruff and pyright separately
+	if utils.executable("ruff-lsp") then
+		local on_attach = function(client, bufnr)
+			-- Disable hover in favour of Pyright
+			if client.name == "ruff_lsp" then
+				client.server_capabilities.hoverProvider = false
+			end
+		end
+		lspconfig.ruff_lsp.setup({ on_attach = on_attach })
+	else
+		vim.notify("ruff-lsp not found", vim.log.levels.WARN, { title = "Nvim-config" })
+	end
+	if utils.executable("pyright") then
+		lspconfig.pyright.setup({
+			settings = {
+				pyright = {
+					-- Using Ruff's import organizer
+					disableOrganizeImports = true,
+				},
+				python = {
+					analysis = {
+						-- Ignore all files for analysis to exclusively use Ruff for linting
+						ignore = { "*" },
+					},
+				},
+			},
+		})
+	else
+		vim.notify("ruff-lsp not found", vim.log.levels.WARN, { title = "Nvim-config" })
+	end
 else
 	vim.notify("pylsp not found!", vim.log.levels.WARN, { title = "Nvim-config" })
 end

@@ -69,6 +69,17 @@ let g:Lf_PreviewResult = {
       \ 'Gtags': 0
       \}
 
+" --------------- Neoformat configurations ---------------  
+
+"Python formatter
+let g:neoformat_python_black = {
+            \ 'exe': 'black',
+            \ 'args': ['--line-length 79', '-q', '-'],
+            \ 'stdin': 1,
+            \ }
+let g:neoformat_enabled_python = ['black']
+
+
 " In order to make sure all the global variables
 " are applied to the plugin, we should load lua
 " module after setting all the global variables here
