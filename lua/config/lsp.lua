@@ -180,8 +180,10 @@ if utils.executable("pylsp") then
 				},
 				python = {
 					analysis = {
-						-- Ignore all files for analysis to exclusively use Ruff for linting
-						ignore = { "*" },
+						autoSearchPaths = true,
+						useLibraryCodeForTypes = true,
+						diagnosticMode = "openFilesOnly",
+						typeCheckingMode = "off",
 					},
 				},
 			},
