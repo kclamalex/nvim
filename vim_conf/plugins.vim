@@ -86,6 +86,7 @@ nnoremap <silent> <space>m :MinimapToggle<CR>
 
 
 " --------------- Minimap.vim configurations ---------------  
+let g:minimap_git_colors = 1
 
 " In order to make sure all the global variables
 " are applied to the plugin, we should load lua
