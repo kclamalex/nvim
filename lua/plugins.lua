@@ -18,6 +18,10 @@ local firenvim_not_active = function()
 end
 
 local plugin_specs = {
+	-- minimap vim plugin
+	{
+		"wfxr/minimap.vim",
+	},
 	-- diff view plugin for git
 	{
 		"sindrets/diffview.nvim",
@@ -94,7 +98,6 @@ local plugin_specs = {
 	-- file explorer
 	{
 		"nvim-tree/nvim-tree.lua",
-		keys = { "<leader>t" },
 		dependencies = {
 			"nvim-tree/nvim-web-devicons",
 			config = function()

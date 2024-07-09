@@ -82,7 +82,10 @@ let g:neoformat_enabled_python = ['black']
 
 " --------------- Nvim-tree configurations ---------------  
 let g:nvim_tree_respect_buf_cwd = 1
+nnoremap <silent> <space>m :MinimapToggle<CR>
 
+
+" --------------- Minimap.vim configurations ---------------  
 
 " In order to make sure all the global variables
 " are applied to the plugin, we should load lua
