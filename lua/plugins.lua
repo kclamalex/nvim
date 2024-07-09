@@ -125,16 +125,11 @@ local plugin_specs = {
 	-- Edit text area in browser using nvim
 	{
 		"glacambre/firenvim",
-		enabled = function()
-			if vim.g.is_win or vim.g.is_mac then
-				return true
-			end
-			return false
-		end,
+		enabled = true,
 		build = function()
 			vim.fn["firenvim#install"](0)
 		end,
-		lazy = true,
+		lazy = not vim.g.started_by_firenvim,
 	},
 	-- Auto format tools
 	{ "sbdchd/neoformat", cmd = { "Neoformat" } },
