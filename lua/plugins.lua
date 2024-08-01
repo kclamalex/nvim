@@ -18,6 +18,13 @@ local firenvim_not_active = function()
 end
 
 local plugin_specs = {
+	-- project management
+	{
+		"ahmedkhalf/project.nvim",
+		config = function()
+			require("config.projects")
+		end,
+	},
 	-- minimap vim plugin
 	{
 		"wfxr/minimap.vim",

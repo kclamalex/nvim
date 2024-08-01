@@ -19,7 +19,13 @@ conf.header = {
 conf.center = {
 	{
 		icon = "󰈞  ",
-		desc = "Find  File                              ",
+		desc = "Open Recent Projects                    ",
+		action = "Telescope projects",
+		key = "<Leader> f p",
+	},
+	{
+		icon = "󰈞  ",
+		desc = "Find File                               ",
 		action = "Telescope find_files",
 		key = "<Leader> f f",
 	},

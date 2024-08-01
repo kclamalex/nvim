@@ -1,6 +1,8 @@
 local nvim_tree = require("nvim-tree")
 local utils = require("utils")
 nvim_tree.setup({
+	sync_root_with_cwd = true,
+	respect_buf_cwd = true,
 	auto_reload_on_write = true,
 	disable_netrw = false,
 	hijack_netrw = true,
@@ -36,6 +38,7 @@ nvim_tree.setup({
 	},
 	update_focused_file = {
 		enable = true,
+		update_root = true,
 		update_cwd = true,
 		ignore_list = {},
 	},
