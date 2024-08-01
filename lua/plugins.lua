@@ -31,7 +31,7 @@ local plugin_specs = {
 	},
 	-- proect management
 	{
-		"ahmedkhalf/proect.nvim",
+		"ahmedkhalf/project.nvim",
 		config = function()
 			require("config.projects")
 		end,
