@@ -35,5 +35,4 @@ utils.keymap("n", "<leader>n", ":bnext<CR>")
 utils.keymap("n", "<leader>p", ":bprevious<CR>")
 utils.keymap("n", "<leader>d", ":bdelete<CR>")
 
--- Map key to format the code
-utils.keymap("n", "<space>f", ":Neoformat<CR>")
+utils.keymap("n", "<space>f", ":Format<CR>")

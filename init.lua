@@ -17,6 +17,7 @@ end
 
 local core_conf_files = {
 	"globals.vim", -- global settings
+	"commands.lua", -- custom commands
 	"keymap.lua", -- Keymap configurations
 	"plugins.vim", -- all the plugins installed and their configurations
 }

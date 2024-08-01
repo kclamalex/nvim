@@ -18,6 +18,13 @@ local firenvim_not_active = function()
 end
 
 local plugin_specs = {
+	-- Formattor
+	{
+		"stevearc/conform.nvim",
+		config = function()
+			require("config.nvim-conform")
+		end,
+	},
 	-- Surround plugin
 	{
 		"kylechui/nvim-surround",
