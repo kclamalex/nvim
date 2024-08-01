@@ -106,20 +106,6 @@ local plugin_specs = {
 			require("config.telescope")
 		end,
 	},
-	-- Tool to run tests
-	{
-		"nvim-neotest/neotest",
-		config = function()
-			require("config.neotest")
-		end,
-		dependencies = {
-			"nvim-neotest/nvim-nio",
-			"nvim-lua/plenary.nvim",
-			"antoinemadec/FixCursorHold.nvim",
-			"nvim-treesitter/nvim-treesitter",
-			"nvim-neotest/neotest-python",
-		},
-	},
 	-- Better escape from insert mode
 	{ "nvim-zh/better-escape.vim" },
 	-- status line
