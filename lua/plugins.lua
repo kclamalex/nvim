@@ -69,8 +69,25 @@ local plugin_specs = {
 			require("config.cmp")
 		end,
 	},
+	-- better UI for vim.ui
+	{
+		"stevearc/dressing.nvim",
+		opts = {},
+	},
+	-- Fzf plugin for telescope
+	{
+		"nvim-telescope/telescope-fzf-native.nvim",
+		build = "cmake -S. -Bbuild -DCMAKE_BUILD_TYPE=Release && cmake --build build --config Release",
+	},
 	-- Fuzzy finder for searching files
-	{ "Yggdroot/LeaderF" },
+	{
+		"nvim-telescope/telescope.nvim",
+		tag = "0.1.8",
+		dependencies = { "nvim-lua/plenary.nvim" },
+		config = function()
+			require("config.telescope")
+		end,
+	},
 	-- Tool to run tests
 	{
 		"nvim-neotest/neotest",
