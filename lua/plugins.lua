@@ -152,8 +152,6 @@ local plugin_specs = {
 		end,
 		lazy = not vim.g.started_by_firenvim,
 	},
-	-- Auto format tools
-	{ "sbdchd/neoformat", cmd = { "Neoformat" } },
 	-- fancy start screen
 	{
 		"nvimdev/dashboard-nvim",
