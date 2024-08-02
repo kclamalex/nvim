@@ -18,6 +18,8 @@ local firenvim_not_active = function()
 end
 
 local plugin_specs = {
+	-- Ident lines
+	{ "lukas-reineke/indent-blankline.nvim", main = "ibl", opts = {} },
 	-- Task runner
 	{
 		"stevearc/overseer.nvim",
