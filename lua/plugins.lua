@@ -18,6 +18,11 @@ local firenvim_not_active = function()
 end
 
 local plugin_specs = {
+	-- Task runner
+	{
+		"stevearc/overseer.nvim",
+		opts = {},
+	},
 	-- Github integration
 	{
 		"pwntester/octo.nvim",
