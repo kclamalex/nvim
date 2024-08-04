@@ -1,3 +1,5 @@
+" Set to use clipboard for all operations
+set clipboard+=unnamedplus
 " Set the title of the Terminal to the currently open file
 function! SetTerminalTitle()
     let titleString = expand('%:t')
