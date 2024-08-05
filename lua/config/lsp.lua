@@ -11,7 +11,7 @@ local capabilities = require("cmp_nvim_lsp").default_capabilities()
 
 local custom_attach = function(client, bufnr)
 	if client.server_capabilities.inlayHintProvider then
-		vim.lsp.inlay_hint.enable(true)
+		vim.lsp.inlay_hint.enable(true, { bufnr = bufnr })
 	end
 
 	utils.keymap("n", "gd", vim.lsp.buf.definition, { desc = "go to definition" })
@@ -99,8 +99,23 @@ if utils.executable("rust-analyzer") then
 	lspconfig.rust_analyzer.setup({
 		capabilities = capabilities,
 		on_attach = custom_attach,
+		cmd = { "rustup", "run", "stable", "rust-analyzer" },
 		settings = {
 			["rust-analyzer"] = {
+				imports = {
+					granularity = {
+						group = "module",
+					},
+					prefix = "self",
+				},
+				cargo = {
+					buildScripts = {
+						enable = true,
+					},
+				},
+				procMacro = {
+					enable = true,
+				},
 				diagnostics = {
 					enable = true,
 				},
