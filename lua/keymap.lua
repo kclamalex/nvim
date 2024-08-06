@@ -36,3 +36,6 @@ utils.keymap("n", "<leader>p", ":bprevious<CR>")
 utils.keymap("n", "<leader>d", ":bdelete<CR>")
 
 utils.keymap("n", "<space>f", ":Format<CR>")
+
+-- Overseer commands 
+utils.keymap("n", "<leader>ost", ":OverseerToggle<CR>")
