@@ -18,6 +18,14 @@ local firenvim_not_active = function()
 end
 
 local plugin_specs = {
+	-- autopairs
+	{
+		"windwp/nvim-autopairs",
+		event = "InsertEnter",
+		config = true,
+		-- use opts = {} for passing setup options
+		-- this is equalent to setup({}) function
+	},
 	-- Ident lines
 	{ "lukas-reineke/indent-blankline.nvim", main = "ibl", opts = {} },
 	-- Task runner
