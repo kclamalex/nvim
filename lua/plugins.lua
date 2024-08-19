@@ -18,6 +18,13 @@ local firenvim_not_active = function()
 end
 
 local plugin_specs = {
+	-- leap.nvim
+	{
+		"ggandor/leap.nvim",
+		config = function()
+			require("leap").create_default_mappings()
+		end,
+	},
 	-- autopairs
 	{
 		"windwp/nvim-autopairs",
