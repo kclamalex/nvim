@@ -21,21 +21,6 @@ local custom_attach = function(client, bufnr)
 	utils.keymap("n", "gr", vim.lsp.buf.references, { desc = "show references" })
 	utils.keymap("n", "[d", diagnostic.goto_prev, { desc = "previous diagnostic" })
 	utils.keymap("n", "]d", diagnostic.goto_next, { desc = "next diagnostic" })
-	-- TODO: figuring out what are the below commands are before enabling them
-	--
-	-- -- this puts diagnostics from opened files to quickfix
-	-- utils.keymap("n", "<space>qw", diagnostic.setqflist, { desc = "put window diagnostics to qf" })
-	-- -- this puts diagnostics from current buffer to quickfix
-	-- utils.keymap("n", "<space>qb", function() set_qflist(bufnr) end, { desc = "put buffer diagnostics to qf" })
-	-- utils.keymap("n", "<space>ca", vim.lsp.buf.code_action, { desc = "LSP code action" })
-	-- utils.keymap("n", "<space>wa", vim.lsp.buf.add_workspace_folder, { desc = "add workspace folder" })
-	-- utils.keymap("n", "<space>wr", vim.lsp.buf.remove_workspace_folder, { desc = "remove workspace folder" })
-	-- utils.keymap("n", "<space>wl", function()
-	--   inspect(vim.lsp.buf.list_workspace_folders())
-	-- end, { desc = "list workspace folder" })
-	--
-	-- Set some key bindings conditional on server capabilities
-
 	api.nvim_create_autocmd("CursorHold", {
 		buffer = bufnr,
 		callback = function()
@@ -249,4 +234,21 @@ if utils.executable("svelteserver") then
 	})
 else
 	vim.notify("svelte not found!", vim.log.levels.WARN, { title = "Nvim-config" })
+end
+
+
+if utils.executable("yaml-language-server") then
+	lspconfig.yamlls.setup({
+		capabilities = capabilities,
+	})
+else
+	vim.notify("yamlls not found!", vim.log.levels.WARN, { title = "Nvim-config" })
+end
+
+if utils.executable("gopls") then
+	lspconfig.gopls.setup({
+		capabilities = capabilities,
+	})
+else
+	vim.notify("gopls not found!", vim.log.levels.WARN, { title = "Nvim-config" })
 end
