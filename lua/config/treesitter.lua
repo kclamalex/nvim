@@ -18,6 +18,10 @@ treesitter.setup({
 		"html",
 		"markdown",
 		"markdown_inline",
+		"go",
+		"gomod",
+		"gowork",
+		"gosum",
 	},
 
 	-- Install parsers synchronously (only applied to `ensure_installed`)

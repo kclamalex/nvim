@@ -38,8 +38,8 @@ local custom_attach = function(client, bufnr)
 
 			local cursor_pos = api.nvim_win_get_cursor(0)
 			if
-				(cursor_pos[1] ~= vim.b.diagnostics_pos[1] or cursor_pos[2] ~= vim.b.diagnostics_pos[2])
-				and #diagnostic.get() > 0
+			    (cursor_pos[1] ~= vim.b.diagnostics_pos[1] or cursor_pos[2] ~= vim.b.diagnostics_pos[2])
+			    and #diagnostic.get() > 0
 			then
 				diagnostic.open_float(nil, float_opts)
 			end
@@ -107,12 +107,14 @@ if utils.executable("rust-analyzer") then
 			},
 		},
 	})
+else
+	vim.notify("rust-analyzer not found!", vim.log.levels.WARN, { title = "Nvim-config" })
 end
+
 
 if utils.executable("lua-language-server") then
 	-- settings for lua-language-server can be found on https://github.com/LuaLS/lua-language-server/wiki/Settings .
 	lspconfig.lua_ls.setup({
-
 		on_attach = custom_attach,
 		settings = {
 			Lua = {
@@ -139,6 +141,8 @@ if utils.executable("lua-language-server") then
 		},
 		capabilities = capabilities,
 	})
+else
+	vim.notify("lua-language-server not found!", vim.log.levels.WARN, { title = "Nvim-config" })
 end
 
 if utils.executable("pylsp") then
@@ -247,7 +251,21 @@ end
 
 if utils.executable("gopls") then
 	lspconfig.gopls.setup({
+		on_attach = custom_attach,
 		capabilities = capabilities,
+		settings = {
+			gopls = {
+				analyses = {
+					fieldalignment = true,
+					nilness = true,
+					unusedparams = true,
+					unusedwrite = true,
+					useany = true,
+				},
+				staticcheck = true,
+				gofumpt = true,
+			}
+		}
 	})
 else
 	vim.notify("gopls not found!", vim.log.levels.WARN, { title = "Nvim-config" })
