@@ -38,8 +38,8 @@ local custom_attach = function(client, bufnr)
 
 			local cursor_pos = api.nvim_win_get_cursor(0)
 			if
-			    (cursor_pos[1] ~= vim.b.diagnostics_pos[1] or cursor_pos[2] ~= vim.b.diagnostics_pos[2])
-			    and #diagnostic.get() > 0
+				(cursor_pos[1] ~= vim.b.diagnostics_pos[1] or cursor_pos[2] ~= vim.b.diagnostics_pos[2])
+				and #diagnostic.get() > 0
 			then
 				diagnostic.open_float(nil, float_opts)
 			end
@@ -111,7 +111,6 @@ else
 	vim.notify("rust-analyzer not found!", vim.log.levels.WARN, { title = "Nvim-config" })
 end
 
-
 if utils.executable("lua-language-server") then
 	-- settings for lua-language-server can be found on https://github.com/LuaLS/lua-language-server/wiki/Settings .
 	lspconfig.lua_ls.setup({
@@ -167,11 +166,11 @@ if utils.executable("pylsp") then
 	if utils.executable("ruff-lsp") then
 		local on_attach = function(client, bufnr)
 			-- Disable hover in favour of Pyright
-			if client.name == "ruff_lsp" then
+			if client.name == "ruff" then
 				client.server_capabilities.hoverProvider = false
 			end
 		end
-		lspconfig.ruff_lsp.setup({ on_attach = on_attach })
+		lspconfig.ruff.setup({ on_attach = on_attach })
 	else
 		vim.notify("ruff-lsp not found", vim.log.levels.WARN, { title = "Nvim-config" })
 	end
@@ -225,11 +224,11 @@ else
 end
 
 if utils.executable("typescript-language-server") then
-	lspconfig.tsserver.setup({
+	lspconfig.ts_ls.setup({
 		capabilities = capabilities,
 	})
 else
-	vim.notify("tsserver not found!", vim.log.levels.WARN, { title = "Nvim-config" })
+	vim.notify("ts_ls not found!", vim.log.levels.WARN, { title = "Nvim-config" })
 end
 
 if utils.executable("svelteserver") then
@@ -239,7 +238,6 @@ if utils.executable("svelteserver") then
 else
 	vim.notify("svelte not found!", vim.log.levels.WARN, { title = "Nvim-config" })
 end
-
 
 if utils.executable("yaml-language-server") then
 	lspconfig.yamlls.setup({
@@ -264,8 +262,8 @@ if utils.executable("gopls") then
 				},
 				staticcheck = true,
 				gofumpt = true,
-			}
-		}
+			},
+		},
 	})
 else
 	vim.notify("gopls not found!", vim.log.levels.WARN, { title = "Nvim-config" })
