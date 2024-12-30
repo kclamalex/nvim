@@ -212,12 +212,13 @@ local plugin_specs = {
 	-- file explorer
 	{
 		"nvim-tree/nvim-tree.lua",
+		lazy = false,
 		dependencies = {
 			"nvim-tree/nvim-web-devicons",
-			config = function()
-				require("config.nvim-tree")
-			end,
 		},
+		config = function()
+			require("config.nvim-tree")
+		end,
 	},
 	-- Git command inside vim
 	{
