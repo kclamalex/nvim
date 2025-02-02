@@ -18,6 +18,22 @@ local firenvim_not_active = function()
 end
 
 local plugin_specs = {
+	-- obsidian
+	{
+		"epwalsh/obsidian.nvim",
+		tag = "v3.9.0", -- recommended, use latest release instead of latest commit
+		requires = {
+			-- Required.
+			"nvim-lua/plenary.nvim",
+			"hrsh7th/nvim-cmp",
+			"nvim-telescope/telescope.nvim",
+			"nvim-treesitter",
+			-- see below for full list of optional dependencies 👇
+		},
+		config = function()
+			require("config.obsidian")
+		end,
+	},
 	-- trouble
 	{
 		"folke/trouble.nvim",
