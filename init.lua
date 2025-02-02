@@ -1,5 +1,8 @@
 vim.loader.enable()
 
+-- Make conceallevel to 1 to show obsidian additional syntax
+vim.opt.conceallevel = 1 
+
 local version = vim.version
 
 -- check if we have the latest stable version of nvim
