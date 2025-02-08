@@ -38,8 +38,8 @@ local custom_attach = function(client, bufnr)
 
 			local cursor_pos = api.nvim_win_get_cursor(0)
 			if
-				(cursor_pos[1] ~= vim.b.diagnostics_pos[1] or cursor_pos[2] ~= vim.b.diagnostics_pos[2])
-				and #diagnostic.get() > 0
+			    (cursor_pos[1] ~= vim.b.diagnostics_pos[1] or cursor_pos[2] ~= vim.b.diagnostics_pos[2])
+			    and #diagnostic.get() > 0
 			then
 				diagnostic.open_float(nil, float_opts)
 			end
@@ -267,4 +267,22 @@ if utils.executable("gopls") then
 	})
 else
 	vim.notify("gopls not found!", vim.log.levels.WARN, { title = "Nvim-config" })
+end
+
+-- assembly lsp
+if utils.executable("asm-lsp") then
+	lspconfig.asm_lsp.setup({
+		capabilities = capabilities,
+	})
+else
+	vim.notify("asm-lsp not found!", vim.log.levels.WARN, { title = "Nvim-config" })
+end
+
+-- C lsp
+if utils.executable("clangd") then
+	lspconfig.clangd.setup({
+		capabilities = capabilities,
+	})
+else
+	vim.notify("clangd not found!", vim.log.levels.WARN, { title = "Nvim-config" })
 end
