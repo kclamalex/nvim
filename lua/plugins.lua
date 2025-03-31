@@ -12,12 +12,26 @@ if not (vim.uv or vim.loop).fs_stat(lazypath) then
 end
 vim.opt.rtp:prepend(lazypath)
 
--- check if firenvim is active
-local firenvim_not_active = function()
-	return not vim.g.started_by_firenvim
-end
-
 local plugin_specs = {
+	-- ============================ LSP settings ===================================
+	-- Language server
+	{
+		"neovim/nvim-lspconfig",
+		opts = {
+			inlay_hints = { enabled = true },
+		},
+		dependencies = {
+			{ "williamboman/mason.nvim", tag = "v1.11.0" },
+			{
+				"williamboman/mason-lspconfig.nvim",
+				tag = "v1.32.0",
+			},
+		},
+		config = function()
+			require("config.lsp")
+		end,
+	},
+	-- ============================ LSP settings ===================================
 	-- obsidian
 	{
 		"epwalsh/obsidian.nvim",
@@ -33,63 +47,6 @@ local plugin_specs = {
 		config = function()
 			require("config.obsidian")
 		end,
-	},
-	-- trouble
-	{
-		"folke/trouble.nvim",
-		opts = {}, -- for default options, refer to the configuration section for custom setup.
-		cmd = "Trouble",
-		keys = {
-			{
-				"<leader>xx",
-				"<cmd>Trouble diagnostics toggle<cr>",
-				desc = "Diagnostics (Trouble)",
-			},
-			{
-				"<leader>xX",
-				"<cmd>Trouble diagnostics toggle filter.buf=0<cr>",
-				desc = "Buffer Diagnostics (Trouble)",
-			},
-			{
-				"<leader>cs",
-				"<cmd>Trouble symbols toggle focus=false<cr>",
-				desc = "Symbols (Trouble)",
-			},
-			{
-				"<leader>cl",
-				"<cmd>Trouble lsp toggle focus=false win.position=right<cr>",
-				desc = "LSP Definitions / references / ... (Trouble)",
-			},
-			{
-				"<leader>xL",
-				"<cmd>Trouble loclist toggle<cr>",
-				desc = "Location List (Trouble)",
-			},
-			{
-				"<leader>xQ",
-				"<cmd>Trouble qflist toggle<cr>",
-				desc = "Quickfix List (Trouble)",
-			},
-		},
-	},
-	-- harpoon2
-	{
-		"ThePrimeagen/harpoon",
-		branch = "harpoon2",
-		dependencies = { "nvim-lua/plenary.nvim" },
-		config = function()
-			require("config.harpoon")
-		end,
-	},
-	-- toggleterm
-	{
-		"akinsho/toggleterm.nvim",
-		config = function()
-			require("config.toggleterm")
-		end,
-		keys = {
-			{ [[<c-\>]] },
-		},
 	},
 	-- leap.nvim
 	{
@@ -243,29 +200,9 @@ local plugin_specs = {
 			require("config.fugitive")
 		end,
 	},
-	-- Language server
-	{
-		"neovim/nvim-lspconfig",
-		opts = {
-			inlay_hints = { enabled = true },
-		},
-		config = function()
-			require("config.lsp")
-		end,
-	},
-	-- Edit text area in browser using nvim
-	{
-		"glacambre/firenvim",
-		enabled = true,
-		build = function()
-			vim.fn["firenvim#install"](0)
-		end,
-		lazy = not vim.g.started_by_firenvim,
-	},
 	-- fancy start screen
 	{
 		"nvimdev/dashboard-nvim",
-		cond = firenvim_not_active,
 		config = utils.load_custom_config("dashboard-nvim"),
 	},
 	{

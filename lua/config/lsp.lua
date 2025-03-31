@@ -5,10 +5,31 @@ local diagnostic = vim.diagnostic
 
 local utils = require("utils")
 
+local mason = require("mason")
+local mason_lspconfig = require("mason-lspconfig")
 local lspconfig = require("lspconfig")
 
 local capabilities = require("cmp_nvim_lsp").default_capabilities()
 
+local lsp_installed = {
+	"vimls",
+	"pylsp",
+	"pyright",
+	"ruff",
+	"rust_analyzer",
+	"asm_lsp",
+	"lua_ls",
+	"gopls",
+	"ts_ls",
+	"yamlls",
+	"svelte",
+	"clangd",
+}
+-- We need to set up mason before setting up mason-lspconfig
+mason.setup()
+mason_lspconfig.setup({
+	ensure_installed = lsp_installed,
+})
 local custom_attach = function(client, bufnr)
 	if client.server_capabilities.inlayHintProvider then
 		vim.lsp.inlay_hint.enable(true, { bufnr = bufnr })
@@ -38,8 +59,8 @@ local custom_attach = function(client, bufnr)
 
 			local cursor_pos = api.nvim_win_get_cursor(0)
 			if
-			    (cursor_pos[1] ~= vim.b.diagnostics_pos[1] or cursor_pos[2] ~= vim.b.diagnostics_pos[2])
-			    and #diagnostic.get() > 0
+				(cursor_pos[1] ~= vim.b.diagnostics_pos[1] or cursor_pos[2] ~= vim.b.diagnostics_pos[2])
+				and #diagnostic.get() > 0
 			then
 				diagnostic.open_float(nil, float_opts)
 			end
@@ -163,7 +184,7 @@ if utils.executable("pylsp") then
 		capabilities = capabilities,
 	})
 	-- Setting ruff and pyright separately
-	if utils.executable("ruff-lsp") then
+	if utils.executable("ruff") then
 		local on_attach = function(client, bufnr)
 			-- Disable hover in favour of Pyright
 			if client.name == "ruff" then
@@ -172,7 +193,7 @@ if utils.executable("pylsp") then
 		end
 		lspconfig.ruff.setup({ on_attach = on_attach })
 	else
-		vim.notify("ruff-lsp not found", vim.log.levels.WARN, { title = "Nvim-config" })
+		vim.notify("ruff not found", vim.log.levels.WARN, { title = "Nvim-config" })
 	end
 	if utils.executable("pyright") then
 		lspconfig.pyright.setup({
