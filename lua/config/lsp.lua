@@ -24,6 +24,7 @@ local lsp_installed = {
 	"yamlls",
 	"svelte",
 	"clangd",
+	"solargraph",
 }
 -- We need to set up mason before setting up mason-lspconfig
 mason.setup()
@@ -306,4 +307,23 @@ if utils.executable("clangd") then
 	})
 else
 	vim.notify("clangd not found!", vim.log.levels.WARN, { title = "Nvim-config" })
+end
+
+if utils.executable("solargraph") then
+	lspconfig.solargraph.setup({
+		capabilities = capabilities,
+		on_attach = custom_attach,
+		settings = {
+			solargraph = {
+				folding = true,
+				references = true,
+				rename = true,
+				symbols = true,
+				diagnostics = true,
+				completion = true,
+			},
+		},
+	})
+else
+	vim.notify("solargraph not found!", vim.log.levels.WARN, { title = "Nvim-config" })
 end
