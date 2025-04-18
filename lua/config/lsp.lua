@@ -24,8 +24,6 @@ local lsp_installed = {
 	"yamlls",
 	"svelte",
 	"clangd",
-	"ruby_lsp",
-	"rubocop",
 }
 -- We need to set up mason before setting up mason-lspconfig
 mason.setup()
@@ -310,6 +308,7 @@ else
 	vim.notify("clangd not found!", vim.log.levels.WARN, { title = "Nvim-config" })
 end
 
+-- Not using mason to manage ruby lsps
 if utils.executable("ruby-lsp") then
 	local is_rubocop_available = utils.executable("rubocop")
 	if is_rubocop_available then
