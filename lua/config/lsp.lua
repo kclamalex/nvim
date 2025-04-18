@@ -25,6 +25,7 @@ local lsp_installed = {
 	"svelte",
 	"clangd",
 	"ruby_lsp",
+	"rubocop",
 }
 -- We need to set up mason before setting up mason-lspconfig
 mason.setup()
@@ -310,11 +311,17 @@ else
 end
 
 if utils.executable("ruby-lsp") then
+	local is_rubocop_available = utils.executable("rubocop")
+	if is_rubocop_available then
+		lspconfig.rubocop.setup({})
+	end
+
 	lspconfig.ruby_lsp.setup({
 		capabilities = capabilities,
 		on_attach = custom_attach,
 		settings = {
 			ruby_lsp = {
+				formatting = true,
 				folding = true,
 				references = true,
 				rename = true,
