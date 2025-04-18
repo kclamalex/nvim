@@ -22,6 +22,7 @@ treesitter.setup({
 		"gomod",
 		"gowork",
 		"gosum",
+		"ruby"
 	},
 
 	-- Install parsers synchronously (only applied to `ensure_installed`)
