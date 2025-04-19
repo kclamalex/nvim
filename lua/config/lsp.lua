@@ -26,7 +26,6 @@ local lsp_installed = {
 	"clangd",
 	"ruby_lsp",
 	"rubocop",
-	"sorbet",
 }
 -- We need to set up mason before setting up mason-lspconfig
 mason.setup()
@@ -314,19 +313,8 @@ end
 -- Not using mason to manage ruby lsps
 if utils.executable("ruby-lsp") then
 	local is_rubocop_available = utils.executable("rubocop")
-	local is_sorbet_available = utils.executable("srb")
 	if is_rubocop_available then
 		lspconfig.rubocop.setup({})
-	end
-	if is_sorbet_available then
-		lspconfig.sorbet.setup({
-			cmd = { "srb", "tc", "--lsp", "--dir=.", "--ignore=/bin" },
-			init_options = {
-				highlightUntyped = true,
-				enableTypechecking = true,
-				renameProvider = true,
-			},
-		})
 	end
 
 	lspconfig.ruby_lsp.setup({
