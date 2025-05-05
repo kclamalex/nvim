@@ -140,10 +140,6 @@ local plugin_specs = {
 			require("config.projects")
 		end,
 	},
-	-- minimap vim plugin
-	{
-		"wfxr/minimap.vim",
-	},
 	-- diff view plugin for git
 	{
 		"sindrets/diffview.nvim",
