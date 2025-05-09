@@ -16,10 +16,10 @@ utils.keymap("", "<right>", "<nop>")
 utils.keymap("n", "<leader>c", ":nohl<CR>")
 
 -- Move around splits using Alt + {h,j,k,l}
-utils.keymap("n", "<A-h>", "<C-w>h")
-utils.keymap("n", "<A-j>", "<C-w>j")
-utils.keymap("n", "<A-k>", "<C-w>k")
-utils.keymap("n", "<A-l>", "<C-w>l")
+utils.keymap("n", "<C-h>", "<C-w>h")
+utils.keymap("n", "<C-j>", "<C-w>j")
+utils.keymap("n", "<C-k>", "<C-w>k")
+utils.keymap("n", "<C-l>", "<C-w>l")
 
 -- Reload configuration without restart nvim
 utils.keymap("n", "<leader>r", ":so %<CR>")
