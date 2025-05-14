@@ -13,6 +13,8 @@ end
 vim.opt.rtp:prepend(lazypath)
 
 local plugin_specs = {
+	-- nvim web devicons
+	{ "nvim-tree/nvim-web-devicons", opts = {} },
 	-- trouble
 	{
 		"folke/trouble.nvim",
