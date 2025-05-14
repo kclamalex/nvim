@@ -17,7 +17,6 @@ local lsp_installed = {
 	"pyright",
 	"ruff",
 	"rust_analyzer",
-	"asm_lsp",
 	"lua_ls",
 	"gopls",
 	"ts_ls",
@@ -61,8 +60,8 @@ local custom_attach = function(client, bufnr)
 
 			local cursor_pos = api.nvim_win_get_cursor(0)
 			if
-				(cursor_pos[1] ~= vim.b.diagnostics_pos[1] or cursor_pos[2] ~= vim.b.diagnostics_pos[2])
-				and #diagnostic.get() > 0
+			    (cursor_pos[1] ~= vim.b.diagnostics_pos[1] or cursor_pos[2] ~= vim.b.diagnostics_pos[2])
+			    and #diagnostic.get() > 0
 			then
 				diagnostic.open_float(nil, float_opts)
 			end

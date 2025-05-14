@@ -70,22 +70,6 @@ local plugin_specs = {
 		end,
 	},
 	-- ============================ LSP settings ===================================
-	-- obsidian
-	{
-		"epwalsh/obsidian.nvim",
-		tag = "v3.9.0", -- recommended, use latest release instead of latest commit
-		requires = {
-			-- Required.
-			"nvim-lua/plenary.nvim",
-			"hrsh7th/nvim-cmp",
-			"nvim-telescope/telescope.nvim",
-			"nvim-treesitter",
-			-- see below for full list of optional dependencies 👇
-		},
-		config = function()
-			require("config.obsidian")
-		end,
-	},
 	-- leap.nvim
 	{
 		"ggandor/leap.nvim",
@@ -147,10 +131,6 @@ local plugin_specs = {
 			require("config.diffview")
 		end,
 	},
-	-- Copilot plugin
-	{
-		"github/copilot.vim",
-	},
 	-- Hybrid line number plugin
 	{
 		"myusuf3/numbers.vim",
@@ -195,7 +175,7 @@ local plugin_specs = {
 	-- Fzf plugin for telescope
 	{
 		"nvim-telescope/telescope-fzf-native.nvim",
-		build = "cmake -S. -Bbuild -DCMAKE_BUILD_TYPE=Release && cmake --build build --config Release",
+		build = "cmake -S. -Bbuild -DCMAKE_POLICY_VERSION_MINIMUM=3.5 -DCMAKE_BUILD_TYPE=Release && cmake --build build --config Release",
 	},
 	-- Fuzzy finder for searching files
 	{
@@ -251,6 +231,26 @@ local plugin_specs = {
 		end,
 	},
 }
+-- obsidian
+if utils.executable("/Users/klam/Documents/obsidian") then
+	local obsidian_opts = {
+		"epwalsh/obsidian.nvim",
+		tag = "v3.9.0", -- recommended, use latest release instead of latest commit
+		requires = {
+			-- Required.
+			"nvim-lua/plenary.nvim",
+			"hrsh7th/nvim-cmp",
+			"nvim-telescope/telescope.nvim",
+			"nvim-treesitter",
+			-- see below for full list of optional dependencies 👇
+		},
+		config = function()
+			require("config.obsidian")
+		end,
+	}
+	table.insert(plugin_specs, obsidian_opts)
+end
+
 
 local lazy_opts = {
 	ui = {
