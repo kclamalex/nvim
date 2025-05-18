@@ -24,7 +24,6 @@ local lsp_installed = {
 	"svelte",
 	"clangd",
 	"ruby_lsp",
-	"rubocop",
 }
 -- We need to set up mason before setting up mason-lspconfig
 mason.setup()
@@ -60,8 +59,8 @@ local custom_attach = function(client, bufnr)
 
 			local cursor_pos = api.nvim_win_get_cursor(0)
 			if
-			    (cursor_pos[1] ~= vim.b.diagnostics_pos[1] or cursor_pos[2] ~= vim.b.diagnostics_pos[2])
-			    and #diagnostic.get() > 0
+				(cursor_pos[1] ~= vim.b.diagnostics_pos[1] or cursor_pos[2] ~= vim.b.diagnostics_pos[2])
+				and #diagnostic.get() > 0
 			then
 				diagnostic.open_float(nil, float_opts)
 			end
@@ -315,8 +314,19 @@ if utils.executable("ruby-lsp") then
 	if is_rubocop_available then
 		lspconfig.rubocop.setup({})
 	end
+	local is_sorbet_available = utils.executable("srb")
+	if is_sorbet_available then
+		lspconfig.sorbet.setup({})
+	end
 
 	lspconfig.ruby_lsp.setup({
+		init_options = {
+			addonSettings = {
+				["Ruby LSP Rails"] = {
+					enablePendingMigrationsPrompt = false,
+				},
+			},
+		},
 		capabilities = capabilities,
 		on_attach = custom_attach,
 		settings = {
