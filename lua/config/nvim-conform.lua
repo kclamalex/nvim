@@ -8,5 +8,15 @@ conform.setup({
 		-- You can customize some of the format options for the filetype (:help conform.format)
 		rust = { "rustfmt", lsp_format = "fallback" },
 		markdown = { "deno_fmt", lsp_format = "fallback" },
+		ruby = { "rubocop" },
+	},
+})
+
+-- Customised formatters
+conform.setup({
+	formatters = {
+		rubocop = {
+			args = { "-a", "-f", "quiet", "--stderr", "--stdin", "$FILENAME" },
+		},
 	},
 })

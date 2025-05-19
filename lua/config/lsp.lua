@@ -23,7 +23,6 @@ local lsp_installed = {
 	"yamlls",
 	"svelte",
 	"clangd",
-	"ruby_lsp",
 }
 -- We need to set up mason before setting up mason-lspconfig
 mason.setup()
@@ -320,13 +319,6 @@ if utils.executable("ruby-lsp") then
 	end
 
 	lspconfig.ruby_lsp.setup({
-		init_options = {
-			addonSettings = {
-				["Ruby LSP Rails"] = {
-					enablePendingMigrationsPrompt = false,
-				},
-			},
-		},
 		capabilities = capabilities,
 		on_attach = custom_attach,
 		settings = {
