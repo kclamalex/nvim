@@ -9,6 +9,13 @@ conform.setup({
 		rust = { "rustfmt", lsp_format = "fallback" },
 		markdown = { "deno_fmt", lsp_format = "fallback" },
 		ruby = { "rubocop" },
+		typescript = { "prettier" },
+		typescriptreact = { "prettier" },
+		javascript = { "prettier" },
+		javascriptreact = { "prettier" },
+		json = { "prettier" },
+		html = { "prettier" },
+		css = { "prettier" },
 	},
 })
 
