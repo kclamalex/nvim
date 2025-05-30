@@ -253,7 +253,6 @@ if utils.executable("/Users/klam/Documents/obsidian") then
 	table.insert(plugin_specs, obsidian_opts)
 end
 
-
 local lazy_opts = {
 	ui = {
 		border = "rounded",

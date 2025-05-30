@@ -21,7 +21,6 @@ local lsp_installed = {
 	"gopls",
 	"ts_ls",
 	"yamlls",
-	"svelte",
 	"clangd",
 }
 -- We need to set up mason before setting up mason-lspconfig
@@ -98,6 +97,15 @@ local custom_attach = function(client, bufnr)
 		local msg = string.format("Language server %s started!", client.name)
 		vim.notify(msg, vim.log.levels.DEBUG, { title = "Nvim-config" })
 	end
+end
+
+if utils.executable("typescript-language-server") then
+	lspconfig.ts_ls.setup({
+		capabilities = capabilities,
+		on_attach = custom_attach,
+	})
+else
+	vim.notify("ts_ls not found!", vim.log.levels.WARN, { title = "Nvim-config" })
 end
 
 if utils.executable("rust-analyzer") then
@@ -243,22 +251,6 @@ else
 	vim.notify("vimls not found!", vim.log.levels.WARN, { title = "Nvim-config" })
 end
 
-if utils.executable("typescript-language-server") then
-	lspconfig.ts_ls.setup({
-		capabilities = capabilities,
-	})
-else
-	vim.notify("ts_ls not found!", vim.log.levels.WARN, { title = "Nvim-config" })
-end
-
-if utils.executable("svelteserver") then
-	lspconfig.svelte.setup({
-		capabilities = capabilities,
-	})
-else
-	vim.notify("svelte not found!", vim.log.levels.WARN, { title = "Nvim-config" })
-end
-
 if utils.executable("yaml-language-server") then
 	lspconfig.yamlls.setup({
 		capabilities = capabilities,
@@ -318,9 +310,15 @@ if utils.executable("ruby-lsp") then
 		lspconfig.sorbet.setup({})
 	end
 
+	local cmd = { "ruby-lsp" }
+	if utils.executable("bundle") then
+		cmd = { "bundle", "exec", "ruby-lsp" }
+	end
+
 	lspconfig.ruby_lsp.setup({
 		capabilities = capabilities,
 		on_attach = custom_attach,
+		cmd = cmd,
 		settings = {
 			ruby_lsp = {
 				formatting = true,
@@ -336,3 +334,4 @@ if utils.executable("ruby-lsp") then
 else
 	vim.notify("ruby-lsp not found!", vim.log.levels.WARN, { title = "Nvim-config" })
 end
+
