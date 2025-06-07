@@ -20,7 +20,7 @@ local plugin_specs = {
 		opts = {},
 	},
 	-- nvim web devicons
-	{ "nvim-tree/nvim-web-devicons",         opts = {} },
+	{ "nvim-tree/nvim-web-devicons", opts = {} },
 	-- trouble
 	{
 		"folke/trouble.nvim",
@@ -183,8 +183,7 @@ local plugin_specs = {
 	-- Fzf plugin for telescope
 	{
 		"nvim-telescope/telescope-fzf-native.nvim",
-		build =
-		"cmake -S. -Bbuild -DCMAKE_POLICY_VERSION_MINIMUM=3.5 -DCMAKE_BUILD_TYPE=Release && cmake --build build --config Release",
+		build = "cmake -S. -Bbuild -DCMAKE_POLICY_VERSION_MINIMUM=3.5 -DCMAKE_BUILD_TYPE=Release && cmake --build build --config Release",
 	},
 	-- Fuzzy finder for searching files
 	{
@@ -258,6 +257,21 @@ if utils.executable("/Users/klam/Documents/obsidian") then
 		end,
 	}
 	table.insert(plugin_specs, obsidian_opts)
+end
+
+-- windsurf
+if utils.executable("windsurf") then
+	local windsurf_opts = {
+		"Exafunction/windsurf.nvim",
+		dependencies = {
+			"nvim-lua/plenary.nvim",
+			"hrsh7th/nvim-cmp",
+		},
+		config = function()
+			require("codeium").setup({})
+		end,
+	}
+	table.insert(plugin_specs, windsurf_opts)
 end
 
 local lazy_opts = {
