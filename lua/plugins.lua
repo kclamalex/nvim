@@ -13,6 +13,14 @@ end
 vim.opt.rtp:prepend(lazypath)
 
 local plugin_specs = {
+	-- show buffers
+	{
+		"akinsho/bufferline.nvim",
+		event = { "BufEnter" },
+		config = function()
+			require("config.bufferline")
+		end,
+	},
 	-- typescript tools
 	{
 		"pmizio/typescript-tools.nvim",
