@@ -25,10 +25,12 @@ local plugin_specs = {
 	{
 		"pmizio/typescript-tools.nvim",
 		dependencies = { "nvim-lua/plenary.nvim", "neovim/nvim-lspconfig" },
-		opts = {},
+		config = function()
+			require("config.typescript-tools")
+		end,
 	},
 	-- nvim web devicons
-	{ "nvim-tree/nvim-web-devicons",         opts = {} },
+	{ "nvim-tree/nvim-web-devicons", opts = {} },
 	-- trouble
 	{
 		"folke/trouble.nvim",
@@ -191,8 +193,7 @@ local plugin_specs = {
 	-- Fzf plugin for telescope
 	{
 		"nvim-telescope/telescope-fzf-native.nvim",
-		build =
-		"cmake -S. -Bbuild -DCMAKE_POLICY_VERSION_MINIMUM=3.5 -DCMAKE_BUILD_TYPE=Release && cmake --build build --config Release",
+		build = "cmake -S. -Bbuild -DCMAKE_POLICY_VERSION_MINIMUM=3.5 -DCMAKE_BUILD_TYPE=Release && cmake --build build --config Release",
 	},
 	-- Fuzzy finder for searching files
 	{
