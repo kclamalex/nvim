@@ -5,29 +5,10 @@ local diagnostic = vim.diagnostic
 
 local utils = require("utils")
 
-local mason = require("mason")
-local mason_lspconfig = require("mason-lspconfig")
 local lspconfig = require("lspconfig")
-local tst = require("typescript-tools")
 
 local capabilities = require("cmp_nvim_lsp").default_capabilities()
 
-local lsp_installed = {
-	"vimls",
-	"pylsp",
-	"pyright",
-	"ruff",
-	"rust_analyzer",
-	"lua_ls",
-	"gopls",
-	"yamlls",
-	"clangd",
-}
--- We need to set up mason before setting up mason-lspconfig
-mason.setup()
-mason_lspconfig.setup({
-	ensure_installed = lsp_installed,
-})
 local custom_attach = function(client, bufnr)
 	if client.server_capabilities.inlayHintProvider then
 		vim.lsp.inlay_hint.enable(true, { bufnr = bufnr })
@@ -57,8 +38,8 @@ local custom_attach = function(client, bufnr)
 
 			local cursor_pos = api.nvim_win_get_cursor(0)
 			if
-			    (cursor_pos[1] ~= vim.b.diagnostics_pos[1] or cursor_pos[2] ~= vim.b.diagnostics_pos[2])
-			    and #diagnostic.get() > 0
+				(cursor_pos[1] ~= vim.b.diagnostics_pos[1] or cursor_pos[2] ~= vim.b.diagnostics_pos[2])
+				and #diagnostic.get() > 0
 			then
 				diagnostic.open_float(nil, float_opts)
 			end
@@ -99,7 +80,7 @@ local custom_attach = function(client, bufnr)
 	end
 end
 
-tst.setup({
+require("typescript-tools").setup({
 	on_attach = custom_attach,
 	settings = {
 		-- spawn additional tsserver instance to calculate diagnostics on it
@@ -142,10 +123,28 @@ tst.setup({
 		jsx_close_tag = {
 			enable = false,
 			filetypes = { "javascriptreact", "typescriptreact" },
-		}
-	}
+		},
+	},
+})
+-- Mason settings
+local mason = require("mason")
+local mason_lspconfig = require("mason-lspconfig")
+local lsp_installed = {
+	"vimls",
+	"pylsp",
+	"pyright",
+	"ruff",
+	"rust_analyzer",
+	"lua_ls",
+	"gopls",
+	"yamlls",
+	"clangd",
 }
-)
+-- We need to set up mason before setting up mason-lspconfig
+mason.setup()
+mason_lspconfig.setup({
+	ensure_installed = lsp_installed,
+})
 
 if utils.executable("rust-analyzer") then
 	lspconfig.rust_analyzer.setup({
