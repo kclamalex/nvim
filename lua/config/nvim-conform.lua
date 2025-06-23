@@ -16,6 +16,8 @@ conform.setup({
 		json = { "prettier" },
 		html = { "prettier" },
 		css = { "prettier" },
+		sh = { "shfmt" },
+		bash = { "shfmt" },
 	},
 })
 
